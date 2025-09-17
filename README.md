@@ -1,11 +1,14 @@
-Pango
-=====
+# @discere-os/pango.wasm
 
-Pango is a library for layout and rendering of text, with an emphasis
-on internationalization. Pango can be used anywhere that text layout
-is needed; however, most of the work on Pango so far has been done using
-the GTK widget toolkit as a test platform. Pango forms the core of text
-and font handling for GTK.
+WebAssembly port of Pango - Text layout and rendering library with comprehensive internationalization support.
+
+[![CI/CD](https://github.com/discere-os/discere-nucleus/actions/workflows/pango-wasm-ci.yml/badge.svg)](https://github.com/discere-os/discere-nucleus/actions)
+[![JSR](https://jsr.io/badges/@discere-os/pango.wasm)](https://jsr.io/@discere-os/pango.wasm)
+[![npm version](https://badge.fury.io/js/@discere-os%2Fpango.wasm.svg)](https://badge.fury.io/js/@discere-os%2Fpango.wasm)
+[![License](https://img.shields.io/badge/License-LGPL--2.0-blue.svg)](COPYING)
+[![Status](https://img.shields.io/badge/status-alpha-orange.svg)](https://github.com/discere-os/discere-nucleus)
+
+Pango is a library for layout and rendering of text, with an emphasis on internationalization.
 
 Pango is designed to be modular; the core Pango layout can be used
 with different font backends. There are three basic backends, with
