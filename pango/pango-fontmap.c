@@ -21,7 +21,7 @@
 
 #include "config.h"
 
-#include <gio/gio.h>
+/* #include <gio/gio.h> */ /* Temporarily disabled for WASM build */
 
 #include "pango-fontmap-private.h"
 #include "pango-fontset-simple.h"

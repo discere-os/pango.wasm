@@ -10,13 +10,15 @@ PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INSTALL_DIR="${PROJECT_ROOT}/install"
 BUILD_DIR="${PROJECT_ROOT}/build"
 
-# Ecosystem dependencies - auto-detect from ecosystem
-GLIB_ROOT="${GLIB_ROOT:-../glib.wasm/install}"
-CAIRO_ROOT="${CAIRO_ROOT:-../cairo.wasm/install}"
-HARFBUZZ_ROOT="${HARFBUZZ_ROOT:-../harfbuzz.wasm/install}"
-FREETYPE_ROOT="${FREETYPE_ROOT:-../freetype.wasm/install}"
-FONTCONFIG_ROOT="${FONTCONFIG_ROOT:-../fontconfig.wasm/install}"
-PIXMAN_ROOT="${PIXMAN_ROOT:-../pixman.wasm/install}"
+# Ecosystem dependencies - auto-detect from ecosystem with absolute paths
+GLIB_ROOT="${GLIB_ROOT:-$(cd ../glib.wasm && pwd)/install}"
+CAIRO_ROOT="${CAIRO_ROOT:-$(cd ../cairo.wasm && pwd)/install}"
+HARFBUZZ_ROOT="${HARFBUZZ_ROOT:-$(cd ../harfbuzz.wasm && pwd)/install}"
+FREETYPE_ROOT="${FREETYPE_ROOT:-$(cd ../freetype.wasm && pwd)/install}"
+FONTCONFIG_ROOT="${FONTCONFIG_ROOT:-$(cd ../fontconfig.wasm && pwd)/install}"
+PIXMAN_ROOT="${PIXMAN_ROOT:-$(cd ../pixman.wasm && pwd)/install}"
+LIBEXPAT_ROOT="${LIBEXPAT_ROOT:-$(cd ../libexpat.wasm && pwd)/install}"
+FRIBIDI_ROOT="${FRIBIDI_ROOT:-$(cd ../fribidi.wasm && pwd)/install}"
 
 echo "=== pango.wasm Production Build (Tier 3 Graphics) ==="
 echo "Complexity: 7/10 - Text layout engine with complex dependencies"
@@ -73,8 +75,9 @@ mkdir -p "$BUILD_DIR" "$INSTALL_DIR"
 echo "🔧 Configuring pango.wasm build..."
 cd "$BUILD_DIR"
 
-# Cross-compilation configuration for complex text layout
-export PKG_CONFIG_PATH="${GLIB_ROOT}/lib/pkgconfig:${CAIRO_ROOT}/lib/pkgconfig:${HARFBUZZ_ROOT}/lib/pkgconfig:${FREETYPE_ROOT}/lib/pkgconfig:${FONTCONFIG_ROOT}/lib/pkgconfig:${PIXMAN_ROOT}/lib/pkgconfig:$PKG_CONFIG_PATH"
+# Cross-compilation configuration for complex text layout - use PKG_CONFIG_LIBDIR with absolute paths
+export PKG_CONFIG_LIBDIR="${GLIB_ROOT}/lib/pkgconfig:${CAIRO_ROOT}/lib/pkgconfig:${HARFBUZZ_ROOT}/lib/pkgconfig:${FREETYPE_ROOT}/lib/pkgconfig:${FONTCONFIG_ROOT}/lib/pkgconfig:${PIXMAN_ROOT}/lib/pkgconfig:${LIBEXPAT_ROOT}/lib/pkgconfig:${FRIBIDI_ROOT}/lib/pkgconfig"
+unset PKG_CONFIG_PATH
 
 # Tier 3 Graphics configuration - complex text processing
 meson setup . "$PROJECT_ROOT" \
@@ -82,11 +85,12 @@ meson setup . "$PROJECT_ROOT" \
     --prefix="$INSTALL_DIR" \
     --buildtype=release \
     -Dintrospection=disabled \
-    -Dgtk_doc=false \
-    -Dinstall-tests=false \
+    -Ddocumentation=false \
+    -Dman-pages=false \
+    -Dbuild-testsuite=false \
+    -Dbuild-examples=false \
     -Dfontconfig=enabled \
     -Dcairo=enabled \
-    -Dharfbuzz=enabled \
     -Dfreetype=enabled \
     -Dsysprof=disabled \
     -Dlibthai=disabled \

@@ -35,7 +35,7 @@
 #include "config.h"
 #include <math.h>
 
-#include <gio/gio.h>
+/* #include <gio/gio.h> */ /* Temporarily disabled for WASM build */
 
 #include "pango-context.h"
 #include "pango-font-private.h"
