@@ -562,6 +562,7 @@ root_inc = include_directories('.')
 pango_inc = include_directories('pango')
 
 subdir('pango')
+subdir('wasm')
 subdir('utils')
 subdir('tools')
 subdir('docs')
