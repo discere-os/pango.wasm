@@ -1,0 +1,82 @@
+{
+  "wasm:cairo": {
+    "version": "^1.18.0",
+    "symbols": {
+      "required": [
+        "cairo_create",
+        "cairo_save",
+        "cairo_restore",
+        "cairo_set_source_rgba",
+        "cairo_show_glyphs",
+        "cairo_scaled_font_create"
+      ]
+    },
+    "loading": "eager",
+    "fallback": null
+  },
+  "wasm:glib": {
+    "version": "^2.78.0",
+    "symbols": {
+      "required": [
+        "g_malloc",
+        "g_free",
+        "g_strdup",
+        "g_utf8_strlen",
+        "g_utf8_get_char",
+        "g_hash_table_new"
+      ]
+    },
+    "loading": "eager",
+    "fallback": null
+  },
+  "wasm:freetype": {
+    "version": "^2.13.0",
+    "symbols": {
+      "required": [
+        "FT_Init_FreeType",
+        "FT_New_Face",
+        "FT_Load_Glyph",
+        "FT_Get_Char_Index"
+      ]
+    },
+    "loading": "eager",
+    "fallback": null
+  },
+  "wasm:fontconfig": {
+    "version": "^2.15.0",
+    "symbols": {
+      "required": [
+        "FcInit",
+        "FcPatternCreate",
+        "FcPatternAddString",
+        "FcFontMatch"
+      ]
+    },
+    "loading": "eager",
+    "fallback": null
+  },
+  "wasm:harfbuzz": {
+    "version": "^8.2.0",
+    "symbols": {
+      "required": [
+        "hb_buffer_create",
+        "hb_buffer_add_utf8",
+        "hb_shape",
+        "hb_font_create"
+      ]
+    },
+    "loading": "eager",
+    "fallback": null
+  },
+  "wasm:fribidi": {
+    "version": "^1.0.0",
+    "symbols": {
+      "required": [
+        "fribidi_get_bidi_types",
+        "fribidi_get_par_direction"
+      ]
+    },
+    "loading": "lazy",
+    "fallback": null
+  }
+}

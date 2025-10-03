@@ -600,3 +600,11 @@ summary('prefix', pango_prefix, section: 'Directories')
 summary('includedir', pango_includedir, section: 'Directories')
 summary('libdir', pango_libdir, section: 'Directories')
 summary('datadir', pango_datadir, section: 'Directories')
+
+# Generate WASM manifest after build
+manifest_script = find_program('../../../../scripts/generate-manifest-meson.sh', required: false)
+if manifest_script.found()
+  run_target('manifest',
+    command: [manifest_script, meson.project_source_root(), meson.project_build_root()]
+  )
+endif
