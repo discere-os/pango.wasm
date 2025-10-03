@@ -28,6 +28,7 @@ pango_side_link_args = [
   '-fPIC',
   '-O3',
   '-flto',
+  '-sERROR_ON_UNDEFINED_SYMBOLS=0',  # Host provides dependencies (cairo, glib, freetype, fontconfig, harfbuzz, etc.)
   '-sEXPORTED_FUNCTIONS=["_pango_wasm_version"]',
 ]
 
@@ -36,6 +37,7 @@ shared_module(
   files('pango_wasm_side.c'),
   dependencies: [libpango_dep],
   name_prefix: '',
+  name_suffix: 'wasm',
   c_args: pango_wasm_cargs,
   link_args: pango_side_link_args,
   install: true,
