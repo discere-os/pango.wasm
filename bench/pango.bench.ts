@@ -1,12 +1,12 @@
 /**
- * ${LIB_TITLE} WASM Benchmarks
+ * Pango WASM Benchmarks
  */
 
-import ${LIB_TITLE}WASM from "../src/lib/index.ts"
+import PangoWASM from "../src/lib/index.ts"
 
-Deno.bench("${LIB_NAME} initialization", {
+Deno.bench("pango initialization", {
   baseline: true
 }, async () => {
-  const lib = new ${LIB_TITLE}WASM()
+  const lib = new PangoWASM()
   await lib.initialize()
 })
