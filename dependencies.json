@@ -1,0 +1,84 @@
+{
+  "dependencies": [
+    {
+      "name": "glib",
+      "version": "2.82.0",
+      "type": "side",
+      "url": "https://wasm.discere.cloud/glib.wasm/v2.82.0/side/glib-side.wasm",
+      "integrity": "sha384-placeholder",
+      "symbols": [
+        "g_malloc",
+        "g_free",
+        "g_strdup",
+        "g_utf8_strlen",
+        "g_utf8_get_char",
+        "g_hash_table_new"
+      ]
+    },
+    {
+      "name": "cairo",
+      "version": "1.18.0",
+      "type": "side",
+      "url": "https://wasm.discere.cloud/cairo.wasm/v1.18.0/side/cairo-side.wasm",
+      "integrity": "sha384-placeholder",
+      "symbols": [
+        "cairo_create",
+        "cairo_save",
+        "cairo_restore",
+        "cairo_set_source_rgba",
+        "cairo_show_glyphs",
+        "cairo_scaled_font_create"
+      ]
+    },
+    {
+      "name": "freetype",
+      "version": "2.13.0",
+      "type": "side",
+      "url": "https://wasm.discere.cloud/freetype.wasm/v2.13.0/side/freetype-side.wasm",
+      "integrity": "sha384-placeholder",
+      "symbols": [
+        "FT_Init_FreeType",
+        "FT_New_Face",
+        "FT_Load_Glyph",
+        "FT_Get_Char_Index"
+      ]
+    },
+    {
+      "name": "fontconfig",
+      "version": "2.15.0",
+      "type": "side",
+      "url": "https://wasm.discere.cloud/fontconfig.wasm/v2.15.0/side/fontconfig-side.wasm",
+      "integrity": "sha384-placeholder",
+      "symbols": [
+        "FcInit",
+        "FcPatternCreate",
+        "FcPatternAddString",
+        "FcFontMatch"
+      ]
+    },
+    {
+      "name": "harfbuzz",
+      "version": "8.4.0",
+      "type": "side",
+      "url": "https://wasm.discere.cloud/harfbuzz.wasm/v8.4.0/side/harfbuzz-side.wasm",
+      "integrity": "sha384-placeholder",
+      "symbols": [
+        "hb_buffer_create",
+        "hb_buffer_add_utf8",
+        "hb_shape",
+        "hb_font_create"
+      ]
+    },
+    {
+      "name": "fribidi",
+      "version": "1.0.13",
+      "type": "side",
+      "url": "https://wasm.discere.cloud/fribidi.wasm/v1.0.13/side/fribidi-side.wasm",
+      "integrity": "sha384-placeholder",
+      "symbols": [
+        "fribidi_get_bidi_types",
+        "fribidi_get_par_direction"
+      ]
+    }
+  ]
+}

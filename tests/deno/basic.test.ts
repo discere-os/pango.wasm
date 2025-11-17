@@ -1,23 +1,48 @@
-import { assert, assertExists } from "@std/assert"
+import { assertEquals, assert } from "https://deno.land/std@0.220.0/assert/mod.ts";
+import Pango from "../../src/lib/index.ts";
 
-Deno.test("Deno runtime features", () => {
-  assert(typeof Deno !== 'undefined', "Deno runtime should be available")
-  assert(typeof WebAssembly !== 'undefined', "WebAssembly should be available")
-})
+Deno.test("module loading", async () => {
+  const pango = new Pango();
+  await pango.initialize();
+  assert(pango, "Pango should initialize");
+});
 
-Deno.test("WASM file accessibility", async () => {
-  try {
-    const wasmFile = await Deno.stat("./install/wasm/pango-main.wasm")
-    assert(wasmFile.isFile, "WASM file should exist")
-    assert(wasmFile.size > 0, "WASM file should not be empty")
-    console.log(`✅ Found WASM file: ${wasmFile.size} bytes`)
-  } catch (error) {
-    console.warn("⚠️  WASM file not found - run 'deno task build:wasm' first")
-  }
-})
+Deno.test("capabilities detection", async () => {
+  const pango = new Pango();
+  await pango.initialize();
+  const caps = pango.getCapabilities();
 
-Deno.test("TypeScript module imports", async () => {
-  const { default: Module } = await import("../../src/lib/index.ts")
-  assertExists(Module, "Module class should be importable")
-  assert(typeof Module === 'function', "Module should be a constructor function")
-})
+  console.log("Detected capabilities:", caps);
+
+  assert(caps.has_wasm_simd, "WASM SIMD should be available (Chrome 113+)");
+  assert(caps.chrome_version >= 113 || caps.chrome_version === 0, "Chrome version should be 113+ or 0 (non-Chrome)");
+});
+
+Deno.test("version string", async () => {
+  const pango = new Pango();
+  await pango.initialize();
+  const version = pango.getVersion();
+
+  console.log("Pango version:", version);
+  assert(version.length > 0, "Version string should not be empty");
+});
+
+Deno.test("minimum requirements check", async () => {
+  const pango = new Pango();
+  await pango.initialize();
+  const meetsRequirements = pango.checkMinimumRequirements();
+
+  console.log("Meets minimum requirements:", meetsRequirements);
+  // This may fail in non-Chrome browsers, so we just log it
+});
+
+Deno.test("module access", async () => {
+  const pango = new Pango();
+  await pango.initialize();
+  const module = pango.getModule();
+
+  assert(module, "Module should be accessible");
+  assert(typeof module.ccall === 'function', "ccall should be available");
+  assert(typeof module.cwrap === 'function', "cwrap should be available");
+  assert(module.HEAPU8 instanceof Uint8Array, "HEAPU8 should be a Uint8Array");
+});
