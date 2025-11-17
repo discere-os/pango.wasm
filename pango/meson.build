@@ -31,6 +31,8 @@ pango_sources = [
   'serializer.c',
   'json/gtkjsonparser.c',
   'json/gtkjsonprinter.c',
+  '../wasm/web_native_simd_text.c',
+  '../wasm/web_native_capabilities.c',
 ]
 
 pango_headers = [
@@ -110,6 +112,7 @@ pango_cflags = [
   '-DPANGO_COMPILATION',
   '-DSYSCONFDIR="@0@"'.format(pango_sysconfdir),
   '-DLIBDIR="@0@"'.format(pango_libdir),
+  '-msimd128',
 ]
 
 pango_inc = include_directories('.')

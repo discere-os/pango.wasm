@@ -9,6 +9,8 @@
     "build:main": "meson setup build-main --cross-file=scripts/emscripten.cross -Dbuildtype=release --prefix=$PWD/install -Dlibdir=wasm -Dbindir=wasm && meson compile -C build-main pango-main && meson install -C build-main",
     "build:side": "meson setup build-side --cross-file=scripts/emscripten.cross -Dbuildtype=release --prefix=$PWD/install -Dlibdir=wasm -Dbindir=wasm -Dc_args='-msimd128' -Dc_link_args='-sSIDE_MODULE=2 -fPIC -O3 -flto' && meson compile -C build-side pango-side && meson install -C build-side && python3 scripts/postinstall.py $PWD/install",
     "build:wasm": "deno task build:main && deno task build:side && deno task manifest",
-    "manifest": "deno run --allow-read --allow-write --allow-run ../../../../scripts/generate-wasm-manifest.ts ."
+    "manifest": "deno run --allow-read --allow-write --allow-run ../../../../scripts/generate-wasm-manifest.ts .",
+    "bench:simd": "deno run --allow-read bench/simd-text-benchmark.ts",
+    "validate:performance": "deno task bench:simd"
   }
 }
